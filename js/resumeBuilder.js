@@ -1,3 +1,8 @@
+/*
+*   Javascript Code informed by GitHub repository https://github.com/fjeansilva/frontend-nanodegree-resume
+*
+*/
+
 var bio = {
   name: "Joseph Mitchell",
   role: "Dircector of Communications",
@@ -12,38 +17,40 @@ var bio = {
   skills: ["HTML", "CSS", "Javascript", "R"], //, "Powerpoint", "Excel", "Word", "tidyverse", "Indesign", "Illustrator"],
   biopic: "images\\joe.jpg",
   display: function() {
-      var self = this;
-      var headerContainer = $('#header');
-      var topContactsContainer = $('#topContacts');
-      var footerpontactsContainer = $('#footerContacts');
+      
+      var headerHTMLHook = $('#header');
+      var contactHTMLHook = $('#topContacts');
+      var footerHTMLHook = $('#footerContacts');
 
 
-      HTMLheaderRole = HTMLheaderRole.replace('%data%', self.role);
-      headerContainer.prepend(HTMLheaderRole);
+    var newLocal = this;
 
-      HTMLheaderName = HTMLheaderName.replace('%data%', self.name);
-      headerContainer.prepend(HTMLheaderName);
+      HTMLheaderRole = HTMLheaderRole.replace('%data%', newLocal.role);
+      headerHTMLHook.prepend(HTMLheaderRole);
 
-      var contacts = Object.keys(this.contacts);
+      HTMLheaderName = HTMLheaderName.replace('%data%', newLocal.name);
+      headerHTMLHook.prepend(HTMLheaderName);
+
+      var contacts = Object.keys(newLocal.contacts);
 
       contacts.forEach(function(contact) {
           var htmlInfoContact = HTMLcontactGeneric.replace('%contact%', contact);
-          htmlInfoContact = htmlInfoContact.replace('%data%', self.contacts[contact]);
-          topContactsContainer.append(htmlInfoContact);
-          footerpontactsContainer.append(htmlInfoContact);
+          htmlInfoContact = htmlInfoContact.replace('%data%', newLocal.contacts[contact]);
+          contactHTMLHook.append(htmlInfoContact);
+          footerHTMLHook.append(htmlInfoContact);
       });
 
-      HTMLbioPic = HTMLbioPic.replace('%data%', self.biopic);
-      headerContainer.append(HTMLbioPic);
+      HTMLbioPic = HTMLbioPic.replace('%data%', newLocal.biopic);
+      headerHTMLHook.append(HTMLbioPic);
 
-      HTMLwelcomeMsg = HTMLwelcomeMsg.replace('%data%', self.welcomeMessage);
-      headerContainer.append(HTMLwelcomeMsg);
+      HTMLwelcomeMsg = HTMLwelcomeMsg.replace('%data%', newLocal.welcomeMessage);
+      headerHTMLHook.append(HTMLwelcomeMsg);
 
-      headerContainer.append(HTMLskillsStart);
+      headerHTMLHook.append(HTMLskillsStart);
 
       var skillsContainer = $('#skills');
 
-      self.skills.forEach(function(skill) {
+      this.skills.forEach(function(skill) {
           var htmlSkill = HTMLskills.replace('%data%', skill);
 
           if (skillsContainer) {
@@ -70,40 +77,40 @@ var education = {
       url: "https://www.udacity.com/"
   }],
   display: function() {
-      var self = this;
-      var educationContainer = $('#education');
+    var newLocal = this;
+      var eduSectionHTML = $('#education');
 
-      educationContainer.append(HTMLschoolStart);
+      eduSectionHTML.append(HTMLschoolStart);
 
-      var educationEntryContainer = $('.education-entry');
+      var eduHTMLHOOK = $('.education-entry');
 
-      self.schools.forEach(function(school) {
+      newLocal.schools.forEach(function(school) {
           var schoolName = HTMLschoolName.replace('%data%', school.name);
           schoolName += HTMLschoolDegree.replace('%data%', school.degree);
           var schoolDate = HTMLschoolDates.replace('%data%', school.dates);
           var schoolLocation = HTMLschoolLocation.replace('%data%', school.location);
 
-          educationEntryContainer.append(schoolName);
-          educationEntryContainer.append(schoolDate);
-          educationEntryContainer.append(schoolLocation);
+          eduHTMLHOOK.append(schoolName);
+          eduHTMLHOOK.append(schoolDate);
+          eduHTMLHOOK.append(schoolLocation);
 
           school.majors.forEach(function(marjor) {
               var schoolMarjor = HTMLschoolMajor.replace('%data%', marjor);
-              educationEntryContainer.append(schoolMarjor);
+              eduHTMLHOOK.append(schoolMarjor);
           });
 
-          educationEntryContainer.append(HTMLonlineClasses);
+          eduHTMLHOOK.append(HTMLonlineClasses);
       });
 
-      self.onlineCourses.forEach(function(course) {
+      newLocal.onlineCourses.forEach(function(course) {
           var onlineTitle = HTMLonlineTitle.replace('%data%', course.title);
           onlineTitle += HTMLonlineSchool.replace('%data%', course.school);
           var onlineDates = HTMLonlineDates.replace('%data%', course.dates);
           var onlineUrl = HTMLonlineURL.replace('%data%', course.url);
 
-          educationEntryContainer.append(onlineTitle);
-          educationEntryContainer.append(onlineDates);
-          educationEntryContainer.append(onlineUrl);
+          eduHTMLHOOK.append(onlineTitle);
+          eduHTMLHOOK.append(onlineDates);
+          eduHTMLHOOK.append(onlineUrl);
       });
   }
 };
@@ -131,14 +138,14 @@ var work = {
       }
   ],
   display: function() {
-      var self = this;
-      var workExperienceContainer = $('#workExperience');
+    var newLocal = this;
+      var workExperienceHTMLHook = $('#workExperience');
 
-      workExperienceContainer.append(HTMLworkStart);
+      workExperienceHTMLHook.append(HTMLworkStart);
 
-      var workEntryContainer = $('.work-entry');
+      var workHTMLHook = $('.work-entry');
 
-      self.jobs.forEach(function(job) {
+      newLocal.jobs.forEach(function(job) {
           var jobHeader = HTMLworkEmployer.replace('%data%', job.employer);
           jobHeader += HTMLworkTitle.replace('%data%', job.title);
 
@@ -147,10 +154,10 @@ var work = {
           var jobLocation = HTMLworkLocation.replace('%data%', job.location);
           var jobDescription = HTMLworkDescription.replace('%data%', job.description);
 
-          workEntryContainer.append(jobHeader);
-          workEntryContainer.append(jobDate);
-          workEntryContainer.append(jobLocation);
-          workEntryContainer.append(jobDescription);
+          workHTMLHook.append(jobHeader);
+          workHTMLHook.append(jobDate);
+          workHTMLHook.append(jobLocation);
+          workHTMLHook.append(jobDescription);
       });
   }
 };
@@ -172,26 +179,26 @@ var projects = {
 
   display: function() {
 
-      var self = this;
-      var projectsContainer = $('#projects');
+    var newLocal = this;
+      var projContainer = $('#projects');
 
-      projectsContainer.append(HTMLprojectStart);
+      projContainer.append(HTMLprojectStart);
 
-      var projectsEntryContainer = $('.project-entry');
+      var projHTMLHook = $('.project-entry');
 
-      self.projects.forEach(function(project) {
+      newLocal.projects.forEach(function(project) {
           var projectTitle = HTMLprojectTitle.replace('%data%', project.title);
           var projectDate = HTMLprojectDates.replace('%data%', project.dates);
           var projectDescription = HTMLprojectDescription.replace('%data%', project.description);
 
-          projectsEntryContainer.append(projectTitle);
-          projectsEntryContainer.append(projectDate);
-          projectsEntryContainer.append(projectDescription);
+          projHTMLHook.append(projectTitle);
+          projHTMLHook.append(projectDate);
+          projHTMLHook.append(projectDescription);
 
           project.images.forEach(function(image) {
               var projectImage = HTMLprojectImage.replace('%data%', image);
 
-              projectsEntryContainer.append(projectImage);
+              projHTMLHook.append(projectImage);
           });
       });
 
@@ -199,10 +206,10 @@ var projects = {
 };
 
 $('#mapDiv').append(googleMap);
-var contents = [bio, work, projects, education];
+var contentObjects = [bio, work, projects, education];
 
-contents.forEach(function(content) {
-  if ('display' in content) {
-      content.display();
+contentObjects.forEach(function(displayFunc) {
+  if ('display' in displayFunc) {
+    displayFunc.display();
   }
 });
