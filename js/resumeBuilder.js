@@ -193,6 +193,7 @@ var projects={
     }
 };
 
+$('#mapDiv').append(googleMap);
 var contents = [ bio, work, projects, education ];
 
 contents.forEach(function(content){
